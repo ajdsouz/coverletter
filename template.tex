@@ -1,0 +1,72 @@
+% Pandoc letter template
+
+\documentclass{letter}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+% Page layout
+\topmargin=-1in
+\textheight=8.5in
+\oddsidemargin=0pt
+\textwidth=6.5in
+
+\begin{document}
+
+% Sender’s signature (Pandoc variable)
+\signature{
+	\vspace{-1cm}
+	\includegraphics[height=20mm, trim=0 20 0 0, clip]{signature.png}\\[-4pt] 
+	$author$
+	}
+
+
+% Remove signature space
+% \setlength{\sigspace}{0pt}
+
+\longindentation=0pt
+\let\raggedleft\raggedright
+
+% Letter recipient block (Pandoc variable)
+\begin{letter}{$for(to)$$to$\\$endfor$}
+
+%\begin{center}
+%$if(subject)$
+%{\large\bf $subject$} \\
+%\medskip
+%$endif$
+%\end{center}
+
+% \vfill
+
+% Sender Name Header
+\begin{center}
+{\large\bf $author$}
+\end{center}
+
+\medskip\hrule height 1pt
+
+% Sender Address Block
+\begin{center}
+$for(address)$$address$\\$endfor$
+\end{center}
+
+% \vfill
+
+
+% Opening (Pandoc variable)
+\opening{$opening$}
+
+
+$body$
+
+% Closing (Pandoc variable)
+\closing{$closing$}
+
+% Enclosures (optional)
+$if(encl)$
+\encl{$for(encl)$$encl$$sep$\\$endfor$}
+$endif$
+
+\end{letter}
+
+\end{document}
